@@ -96,12 +96,6 @@ const App = () => {
   };
 
   const updateEthers = () => {
-    // let tempProvider = new ethers.providers.Web3Provider(window.ethereum);
-    // setProvider(tempProvider);
-
-    // let tempSigner = provider.getSigner();
-    // setSigner(tempSigner);
-
     const network = Object.keys(Powerballer.networks);
 
     // Set these else where and call from state
@@ -127,82 +121,9 @@ const App = () => {
       });
   };
 
-  const chainChangedHandler = async () => {
-    // reload the page to avoid any errors with chain
-    // change mid use of application
-    window.location.reload();
-  };
-
-  // listen for account changes
-  window.ethereum.on("accountsChanged", accountChangedHandler);
-  window.ethereum.on("chainChanged", chainChangedHandler);
-
-  // const handleChange = (e) => {
-  //   setStorageValue(e.target.value);
-  //   setStoredText(e.target.value);
-  // };
-
   /////////////////////////////////////////////////////////////////////////
+  //                              GET OWNER
   /////////////////////////////////////////////////////////////////////////
-
-  // TEXT SETTER
-  // const textSetter = async (event) => {
-  //   const contract = new ethers.Contract(
-  //     currentContractVal,
-  //     currentContractABI,
-  //     signer
-  //   );
-  //   const tx = await contract.setString(storedText);
-  //   const receipt = await tx.wait();
-  // };
-  //
-  // // TEXT GETTER
-  // const textGetter = async () => {
-  //   console.log("signer", signer);
-  //
-  //   const contract = new ethers.Contract(
-  //     currentContractVal,
-  //     currentContractABI,
-  //     provider
-  //   );
-  //   const text = await contract.getString();
-  //   setStoredChainText(text);
-  // };
-
-  /////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////
-
-  // // Number function
-  // const handleSetter = async () => {
-  //   const contract = new ethers.Contract(
-  //     currentContractVal,
-  //     currentContractABI,
-  //     signer
-  //   );
-  //   const tx = await contract.set(storageValue);
-  //   const receipt = await tx.wait();
-  //
-  //   const { confirmations, transactionHash } = receipt;
-  //
-  //   setTransactionConfirms(confirmations);
-  //   setTransactionHash(transactionHash);
-  // };
-  //
-  // const handleGetter = async () => {
-  //   // let tempProvider = new ethers.providers.Web3Provider(window.ethereum);
-  //   // setProvider(tempProvider);
-  //
-  //   const contract = new ethers.Contract(
-  //     currentContractVal,
-  //     currentContractABI,
-  //     provider
-  //   );
-  //
-  //   const value = await contract.get();
-  //   const formatValue = await value.toString();
-  //
-  //   setStoredChainValue(formatValue);
-  // };
 
   const getOwner = async () => {
     const contract = new ethers.Contract(
@@ -214,6 +135,10 @@ const App = () => {
     const owner = await contract.owner();
     console.log("owner", owner);
   };
+
+  /////////////////////////////////////////////////////////////////////////
+  //                              START LOTTERY
+  /////////////////////////////////////////////////////////////////////////
 
   const startLottery = async () => {
     console.log("startLottery");
@@ -236,6 +161,10 @@ const App = () => {
     setTransactionHash(transactionHash);
   };
 
+  /////////////////////////////////////////////////////////////////////////
+  //                              PICK WINNER
+  /////////////////////////////////////////////////////////////////////////
+
   const pickWinner = async () => {
     console.log("pickWinner");
 
@@ -255,6 +184,10 @@ const App = () => {
     console.log("Winner was picked");
   };
 
+  /////////////////////////////////////////////////////////////////////////
+  //                              GET PLAYERS
+  /////////////////////////////////////////////////////////////////////////
+
   const getPlayers = async () => {
     const contract = new ethers.Contract(
       currentContractVal,
@@ -263,19 +196,15 @@ const App = () => {
     );
 
     const players = await contract.getPlayers();
-    console.log(
-      "players",
-      players.map((p) => {
-        console.log("p", p);
-      })
-    );
   };
+
+  /////////////////////////////////////////////////////////////////////////
+  //                              ENTER LOTTERY
+  /////////////////////////////////////////////////////////////////////////
 
   const enterLottery = () => {
     let gas_limit = "0x100000";
     let gas_price = provider.getGasPrice();
-    console.log("enterLottery");
-    console.log("signer", signer);
 
     const contract = new ethers.Contract(
       currentContractVal,
@@ -298,8 +227,14 @@ const App = () => {
     });
   };
 
-  /////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////
+  const chainChangedHandler = async () => {
+    // reload the page on any change to avoid any errors with chain
+    window.location.reload();
+  };
+
+  // listen for account changes
+  window.ethereum.on("accountsChanged", accountChangedHandler);
+  window.ethereum.on("chainChanged", chainChangedHandler);
 
   const renderComponent = (item) => {
     setCurrentItem(item);
@@ -359,15 +294,9 @@ const App = () => {
 
   setupEthers();
 
-  ///////////////////////////////////////////////////////////////////
-  ////////////////////// LOGGERS   //////////////////////////////////
-  //
-  // console.log("currentContractVal", currentContractVal);
-  // console.log("currentContractABI", currentContractABI);
-  // console.log("currentSigner", signer);
-
-  ///////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////
+  //                              CONSOLE.LOGS
+  /////////////////////////////////////////////////////////////////////////
 
   return (
     <>
