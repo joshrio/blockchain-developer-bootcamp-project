@@ -9,17 +9,17 @@ export const Container = styled.div`
 
 export const Menu = styled.div`
   height: 100%;
-  width: 20%;
+  width: 25%;
   background: rgb(245, 246, 250);
   border-right: 1px solid #d2d6dc;
 `;
 
 export const Body = styled.div`
-  height: auto;
   width: 80%;
   background: #fafafa;
   padding-left: 20px;
   padding-right: 20px;
+  overflow: scroll;
 `;
 
 export const List = styled.div`

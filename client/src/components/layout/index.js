@@ -3,8 +3,19 @@ import React from "react";
 
 // Relative Imports
 import { Container, Menu, Body, List, Item } from "./styles";
+import Sidebar from "../sidebar";
 
-const Layout = ({ children, renderComponent }) => {
+const Layout = ({
+  children,
+  renderComponent,
+  balance,
+  address,
+  connect,
+  walletLabel,
+  pickWinner,
+  startLottery,
+  enterLottery,
+}) => {
   return (
     <Container>
       <Menu>
@@ -12,7 +23,7 @@ const Layout = ({ children, renderComponent }) => {
           <Item onClick={() => renderComponent("project")}>Project</Item>
           <Item onClick={() => renderComponent("readme")}>Readme</Item>
           <Item onClick={() => renderComponent("application")}>
-            dApplication
+            Powerballer
           </Item>
           <Item onClick={() => renderComponent("walkthrough")}>
             Walkthrough
@@ -20,6 +31,15 @@ const Layout = ({ children, renderComponent }) => {
         </List>
       </Menu>
       <Body>{children}</Body>
+      <Sidebar
+        connect={connect}
+        address={address}
+        balance={balance}
+        walletLabel={walletLabel}
+        pickWinner={pickWinner}
+        startLottery={startLottery}
+        enterLottery={enterLottery}
+      />
     </Container>
   );
 };

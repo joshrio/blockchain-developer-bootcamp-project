@@ -11,7 +11,6 @@ const Navigation = ({ onClick, label }) => {
         <Icon />
         <Project>Project</Project>
       </Brand>
-      <Wallet onClick={onClick}>{label}</Wallet>
     </Container>
   );
 };

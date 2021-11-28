@@ -12,6 +12,8 @@ import Layout from "./components/layout";
 import ReactMarkdown from "react-markdown";
 import ReadMe from "./components/readme";
 import Card from "./components/card";
+import Wallet from "./components/wallet";
+import Sidebar from "./components/sidebar";
 
 // Contracts
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
@@ -41,8 +43,8 @@ const App = () => {
   const [readOnlyContract, setReadOnlyContract] = useState(null);
 
   // FOR TRANSACTIONS
-  const [transactionHash, setTransactionHash] = useState(null);
-  const [transactionConfirms, setTransactionConfirms] = useState(null);
+  const [ticketHash, setTicketHash] = useState(null);
+  const [ticketConfirms, setTicketConfirms] = useState(null);
 
   // FOR LAYOUT
   const [currentItem, setCurrentItem] = useState("application");
@@ -175,8 +177,8 @@ const App = () => {
     const receipt = await tx.wait();
     const { confirmations, transactionHash } = receipt;
 
-    setTransactionConfirms(confirmations);
-    setTransactionHash(transactionHash);
+    // setTransactionConfirms(confirmations);
+    // setTransactionHash(transactionHash);
   };
 
   /////////////////////////////////////////////////////////////////////////
@@ -184,8 +186,6 @@ const App = () => {
   /////////////////////////////////////////////////////////////////////////
 
   const pickWinner = async () => {
-    console.log("pickWinner");
-
     const contract = new ethers.Contract(
       currentContractVal,
       currentContractABI,
@@ -264,7 +264,10 @@ const App = () => {
     };
 
     contract.enterLottery(tx).then((transaction) => {
-      console.log(transaction);
+      // console.log(transaction);
+      const { confirmations, transactionHash } = transaction;
+      setTicketHash(transactionHash);
+      setTicketConfirms(confirmations);
 
       console.log("Send finished!");
     });
@@ -301,27 +304,22 @@ const App = () => {
         return (
           <>
             <h1>Powerballer Lottery</h1>
-            {signer === null ? (
-              <div>Connect a wallet</div>
-            ) : (
-              <>
-                <button onClick={startLottery}>Start Lottery</button>
-                {/* <button onClick={getOwner}>Get Owner</button> */}
-                <button onClick={enterLottery}>Enter Lottery</button>
-                {/* <button onClick={getPlayers}>Get Players</button> */}
-                <button onClick={pickWinner}>Pick Winner</button>
-              </>
-            )}
+            {/*
+            <button onClick={startLottery}>Start Lottery</button>
+            <button onClick={getOwner}>Get Owner</button>
+            <button onClick={getPlayers}>Get Players</button>
+            <button onClick={pickWinner}>Pick Winner</button>
+            */}
+
             <div>
               <div>
-                <h3>Address: {defaultAccount}</h3>
-              </div>
-              <div>
-                <h3>Balance: {userBalance}</h3>
-              </div>
-              <div>
                 {players.map((p, i) => (
-                  <Card key={i} player={p} />
+                  <Card
+                    key={i}
+                    player={p}
+                    reciept={ticketHash}
+                    confirmations={ticketConfirms}
+                  />
                 ))}
               </div>
             </div>
@@ -343,7 +341,21 @@ const App = () => {
   return (
     <>
       <Navigation onClick={connectWalletHandler} label={connButtonText} />
-      <Layout renderComponent={renderComponent}>{renderItems()}</Layout>
+      <Layout
+        renderComponent={renderComponent}
+        address={defaultAccount}
+        balance={userBalance}
+        connect={connectWalletHandler}
+        walletLabel={connButtonText}
+        reciept={ticketHash}
+        confirmations={ticketConfirms}
+        pickWinner={pickWinner}
+        startLottery={startLottery}
+        owner={owner}
+        enterLottery={enterLottery}
+      >
+        {renderItems()}
+      </Layout>
     </>
   );
 };
