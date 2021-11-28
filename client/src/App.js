@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ethers } from "ethers";
-import SimpleStorageContract from "./contracts/SimpleStorage.json";
+
 import Navigation from "./components/nav/index.js";
 
 import getEthers from "./getEthers";
@@ -11,6 +11,10 @@ import Layout from "./components/layout/index.js";
 import ReactMarkdown from "react-markdown";
 import ReadMe from "./components/readme/index.js";
 
+// Contracts
+import SimpleStorageContract from "./contracts/SimpleStorage.json";
+import Powerballer from "./contracts/Powerballer.json";
+
 const App = () => {
   // FOR USER DETAILS & WALLET
   const [errorMessage, setErrorMessage] = useState(null);
@@ -19,12 +23,12 @@ const App = () => {
   const [connButtonText, setConnButtonText] = useState("Connect Wallet");
 
   // FOR TEXT
-  const [storedText, setStoredText] = useState("");
-  const [storedChainText, setStoredChainText] = useState("");
+  // const [storedText, setStoredText] = useState("");
+  // const [storedChainText, setStoredChainText] = useState("");
 
   // FOR NUMBER
-  const [storageValue, setStorageValue] = useState("");
-  const [storedChainValue, setStoredChainValue] = useState("");
+  // const [storageValue, setStorageValue] = useState("");
+  // const [storedChainValue, setStoredChainValue] = useState("");
 
   // FOR CONTRACT
   const [currentContractVal, setCurrentContractVal] = useState(null);
@@ -38,18 +42,20 @@ const App = () => {
   const [transactionConfirms, setTransactionConfirms] = useState(null);
 
   // FOR LAYOUT
-  const [currentItem, setCurrentItem] = useState("project");
+  const [currentItem, setCurrentItem] = useState("application");
+
+  // FOR POWERBALLERS
+  const [players, setPlayers] = useState([]);
 
   const setupEthers = async () => {
     // Ethers
     // This gets all the main values required to interact with the contracts
     const ethers = await getEthers();
-    const networkId = await SimpleStorageContract.networks;
+    const networkId = await Powerballer.networks;
 
-    // // NOTE: Need to figure out how to get 5777 automatically
-    const network = Object.keys(SimpleStorageContract.networks);
-    const deployedContract = SimpleStorageContract.networks[network[0]].address;
-    const deployedContractABI = SimpleStorageContract.abi;
+    const network = Object.keys(Powerballer.networks);
+    const deployedContract = Powerballer.networks[network[0]].address;
+    const deployedContractABI = Powerballer.abi;
 
     // Set the basic values
     setCurrentContractVal(deployedContract);
@@ -96,11 +102,11 @@ const App = () => {
     // let tempSigner = provider.getSigner();
     // setSigner(tempSigner);
 
-    const network = Object.keys(SimpleStorageContract.networks);
+    const network = Object.keys(Powerballer.networks);
 
     // Set these else where and call from state
-    let contractAddress = SimpleStorageContract.networks[network[0]].address;
-    let contractABI = SimpleStorageContract.abi;
+    let contractAddress = Powerballer.networks[network[0]].address;
+    let contractABI = Powerballer.abi;
 
     let tempContract = new ethers.Contract(
       contractAddress,
@@ -131,71 +137,165 @@ const App = () => {
   window.ethereum.on("accountsChanged", accountChangedHandler);
   window.ethereum.on("chainChanged", chainChangedHandler);
 
-  const handleChange = (e) => {
-    setStorageValue(e.target.value);
-    setStoredText(e.target.value);
-  };
+  // const handleChange = (e) => {
+  //   setStorageValue(e.target.value);
+  //   setStoredText(e.target.value);
+  // };
 
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
 
   // TEXT SETTER
-  const textSetter = async (event) => {
-    console.log("signer", signer);
-    const contract = new ethers.Contract(
-      currentContractVal,
-      currentContractABI,
-      signer
-    );
-    const tx = await contract.setString(storedText);
-    const receipt = await tx.wait();
-  };
+  // const textSetter = async (event) => {
+  //   const contract = new ethers.Contract(
+  //     currentContractVal,
+  //     currentContractABI,
+  //     signer
+  //   );
+  //   const tx = await contract.setString(storedText);
+  //   const receipt = await tx.wait();
+  // };
+  //
+  // // TEXT GETTER
+  // const textGetter = async () => {
+  //   console.log("signer", signer);
+  //
+  //   const contract = new ethers.Contract(
+  //     currentContractVal,
+  //     currentContractABI,
+  //     provider
+  //   );
+  //   const text = await contract.getString();
+  //   setStoredChainText(text);
+  // };
 
-  // TEXT GETTER
-  const textGetter = async () => {
-    console.log("signer", signer);
+  /////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////
 
+  // // Number function
+  // const handleSetter = async () => {
+  //   const contract = new ethers.Contract(
+  //     currentContractVal,
+  //     currentContractABI,
+  //     signer
+  //   );
+  //   const tx = await contract.set(storageValue);
+  //   const receipt = await tx.wait();
+  //
+  //   const { confirmations, transactionHash } = receipt;
+  //
+  //   setTransactionConfirms(confirmations);
+  //   setTransactionHash(transactionHash);
+  // };
+  //
+  // const handleGetter = async () => {
+  //   // let tempProvider = new ethers.providers.Web3Provider(window.ethereum);
+  //   // setProvider(tempProvider);
+  //
+  //   const contract = new ethers.Contract(
+  //     currentContractVal,
+  //     currentContractABI,
+  //     provider
+  //   );
+  //
+  //   const value = await contract.get();
+  //   const formatValue = await value.toString();
+  //
+  //   setStoredChainValue(formatValue);
+  // };
+
+  const getOwner = async () => {
     const contract = new ethers.Contract(
       currentContractVal,
       currentContractABI,
       provider
     );
-    const text = await contract.getString();
-    setStoredChainText(text);
+
+    const owner = await contract.owner();
+    console.log("owner", owner);
   };
 
-  /////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////
+  const startLottery = async () => {
+    console.log("startLottery");
 
-  // Number function
-  const handleSetter = async () => {
     const contract = new ethers.Contract(
       currentContractVal,
       currentContractABI,
       signer
     );
-    const tx = await contract.set(storageValue);
+
+    const tx = await contract.startLottery();
+
     const receipt = await tx.wait();
 
     const { confirmations, transactionHash } = receipt;
+
+    console.log(confirmations, transactionHash);
 
     setTransactionConfirms(confirmations);
     setTransactionHash(transactionHash);
   };
 
-  const handleGetter = async () => {
-    // let tempProvider = new ethers.providers.Web3Provider(window.ethereum);
-    // setProvider(tempProvider);
+  const pickWinner = async () => {
+    console.log("pickWinner");
 
+    const contract = new ethers.Contract(
+      currentContractVal,
+      currentContractABI,
+      signer
+    );
+
+    const tx = await contract.pickWinner();
+
+    const receipt = await tx.wait();
+
+    const { confirmations, transactionHash } = receipt;
+
+    console.log(confirmations, transactionHash);
+    console.log("Winner was picked");
+  };
+
+  const getPlayers = async () => {
     const contract = new ethers.Contract(
       currentContractVal,
       currentContractABI,
       provider
     );
-    const value = await contract.get();
-    const formatValue = await value.toString();
 
-    setStoredChainValue(formatValue);
+    const players = await contract.getPlayers();
+    console.log(
+      "players",
+      players.map((p) => {
+        console.log("p", p);
+      })
+    );
+  };
+
+  const enterLottery = () => {
+    let gas_limit = "0x100000";
+    let gas_price = provider.getGasPrice();
+    console.log("enterLottery");
+    console.log("signer", signer);
+
+    const contract = new ethers.Contract(
+      currentContractVal,
+      currentContractABI,
+      signer
+    );
+
+    const tx = {
+      from: defaultAccount,
+      value: ethers.utils.parseEther("0.01"),
+      nonce: provider.getTransactionCount(defaultAccount, "latest"),
+      gasLimit: ethers.utils.hexlify(gas_limit), // 100000
+      gasPrice: gas_price,
+    };
+
+    contract.enterLottery(tx).then((transaction) => {
+      console.log(transaction);
+
+      console.log("Send finished!");
+    });
   };
 
   /////////////////////////////////////////////////////////////////////////
@@ -205,7 +305,7 @@ const App = () => {
     setCurrentItem(item);
   };
 
-  const renderThing = () => {
+  const renderItems = () => {
     switch (currentItem) {
       case "project":
         return <h1>Project</h1>;
@@ -219,64 +319,34 @@ const App = () => {
       case "application":
         return (
           <>
-            <h1>Application</h1>
-            <div>
+            <h1>Powerballer Lottery</h1>
+            {signer === null ? (
+              <div>Connect a wallet</div>
+            ) : (
               <>
-                <Input
-                  name="storageValue"
-                  placeholder="Enter amount"
-                  label="Enter value"
-                  type="number"
-                  onChange={(e) => setStorageValue(e.target.value)}
-                  value={storageValue}
-                />
-                <Input
-                  name="storedText"
-                  placeholder="Enter text"
-                  label="Enter text"
-                  type="text"
-                  onChange={(e) => setStoredText(e.target.value)}
-                  value={storedText}
-                />
-                {signer === null ? (
-                  <div>Please connect a wallet</div>
-                ) : (
-                  <div>
-                    <>
-                      <button onClick={handleGetter}>Get Number</button>
-                      <button onClick={handleSetter}>Set Number</button>
-                    </>
-                    <>
-                      <button onClick={textGetter}>Get Text</button>
-                      <button onClick={textSetter}>Set Text</button>
-                    </>
-                  </div>
-                )}
+                <button onClick={startLottery}>Start Lottery</button>
+                <button onClick={getOwner}>Get Owner</button>
+                <button onClick={enterLottery}>Enter Lottery</button>
+                <button onClick={getPlayers}>Get Players</button>
+                <button onClick={pickWinner}>Pick Winner</button>
               </>
-              {transactionHash === null ? (
-                <div />
-              ) : (
-                <>
-                  <div>Transaction Hash: {transactionHash}</div>
-                  <div>Transaction confirmations: {transactionConfirms}</div>
-                </>
-              )}
+            )}
 
+            <div>
               <div>
-                <br />
+                <h3>Address: {defaultAccount}</h3>
+              </div>
+              <div>
+                <h3>Balance: {userBalance}</h3>
+              </div>
+              <div>
                 <div>
-                  <h3>Address: {defaultAccount}</h3>
-                </div>
-                <div>
-                  <h3>Balance: {userBalance}</h3>
+                  Players:{" "}
+                  {players.map((player) => {
+                    console.log("map", player);
+                  })}
                 </div>
               </div>
-              <div>The state value is: {storageValue}</div>
-              <div>The chain value is: {storedChainValue}</div>
-              <br />
-              <br />
-              <div>The state text is: {storedText}</div>
-              <div>The chain text is: {storedChainText}</div>
             </div>
           </>
         );
@@ -288,12 +358,21 @@ const App = () => {
   };
 
   setupEthers();
-  console.log("item", currentItem);
+
+  ///////////////////////////////////////////////////////////////////
+  ////////////////////// LOGGERS   //////////////////////////////////
+  //
+  // console.log("currentContractVal", currentContractVal);
+  // console.log("currentContractABI", currentContractABI);
+  // console.log("currentSigner", signer);
+
+  ///////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////
 
   return (
     <>
       <Navigation onClick={connectWalletHandler} label={connButtonText} />
-      <Layout renderComponent={renderComponent}>{renderThing()}</Layout>
+      <Layout renderComponent={renderComponent}>{renderItems()}</Layout>
     </>
   );
 };

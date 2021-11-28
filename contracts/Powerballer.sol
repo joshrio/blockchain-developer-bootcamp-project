@@ -33,7 +33,7 @@ contract Powerballer {
     players.push(msg.sender);
   }
 
-  // Pick the lottery winner
+  // Pick the lottery winner from the array
   function pickWinner() public isOwner {
     // randomGenerator() picks a number no larger than the players array.length
     uint index = randomGenerator() % players.length;

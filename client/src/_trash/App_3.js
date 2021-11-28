@@ -288,7 +288,6 @@ const App = () => {
   };
 
   setupEthers();
-  console.log("item", currentItem);
 
   return (
     <>
