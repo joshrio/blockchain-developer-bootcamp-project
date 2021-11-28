@@ -38,6 +38,7 @@ const App = () => {
   const [provider, setProvider] = useState(null);
   const [signer, setSigner] = useState(null);
   const [contract, setContract] = useState(null);
+  const [readOnlyContract, setReadOnlyContract] = useState(null);
 
   // FOR TRANSACTIONS
   const [transactionHash, setTransactionHash] = useState(null);
@@ -48,6 +49,7 @@ const App = () => {
 
   // FOR POWERBALLERS
   const [players, setPlayers] = useState([]);
+  const [owner, setOwner] = useState(null);
 
   /////////////////////////////////////////////////////////////////////////
   //                              SETUP ETHERS
@@ -64,6 +66,7 @@ const App = () => {
     // Set state for Contract and ABI
     setCurrentContractVal(deployedContract);
     setCurrentAbiVal(deployedContractABI);
+    setupReadOnlyContract();
   };
 
   /////////////////////////////////////////////////////////////////////////
@@ -143,17 +146,17 @@ const App = () => {
   /////////////////////////////////////////////////////////////////////////
   //                              GET OWNER
   /////////////////////////////////////////////////////////////////////////
-
-  const getOwner = async () => {
-    const contract = new ethers.Contract(
-      currentContractVal,
-      currentContractABI,
-      provider
-    );
-
-    const owner = await contract.owner();
-    console.log("owner", owner);
-  };
+  //
+  // const getOwner = async () => {
+  //   const contract = new ethers.Contract(
+  //     currentContractVal,
+  //     currentContractABI,
+  //     provider
+  //   );
+  //
+  //   const owner = await contract.owner();
+  //   console.log("owner", owner);
+  // };
 
   /////////////////////////////////////////////////////////////////////////
   //                              START LOTTERY
@@ -197,19 +200,46 @@ const App = () => {
   };
 
   /////////////////////////////////////////////////////////////////////////
+  //                              READ ONLY CONTRACT
+  /////////////////////////////////////////////////////////////////////////
+
+  const setupReadOnlyContract = async () => {
+    if (readOnlyContract === null) {
+      let provider = new ethers.providers.Web3Provider(window.ethereum);
+      let network = Object.keys(Powerballer.networks);
+
+      // Set these else where and call from state
+      let contractAddress = Powerballer.networks[network[0]].address;
+      let contractABI = Powerballer.abi;
+
+      let readOnly = new ethers.Contract(
+        contractAddress,
+        contractABI,
+        provider
+      );
+
+      const players = await readOnly.getPlayers();
+      const owner = await readOnly.owner();
+
+      setPlayers(players);
+      setReadOnlyContract(readOnly);
+    }
+  };
+  /////////////////////////////////////////////////////////////////////////
   //                              GET PLAYERS
   /////////////////////////////////////////////////////////////////////////
 
-  const getPlayers = async () => {
-    const contract = new ethers.Contract(
-      currentContractVal,
-      currentContractABI,
-      provider
-    );
-
-    const players = await contract.getPlayers();
-    setPlayers(players);
-  };
+  // const getPlayers = async () => {
+  // const contract = new ethers.Contract(
+  //   currentContractVal,
+  //   currentContractABI,
+  //   provider
+  // );
+  //
+  // const players = await readOnlyContract.getPlayers();
+  // console.log("Players,", players);
+  //   setPlayers(players);
+  // };
 
   /////////////////////////////////////////////////////////////////////////
   //                              ENTER LOTTERY
@@ -239,8 +269,6 @@ const App = () => {
       console.log("Send finished!");
     });
   };
-
-  /////////////////////////////////////////////////////////////////////////
 
   /////////////////////////////////////////////////////////////////////////
   //                              CHAIN CHANGE HANDLER
@@ -278,13 +306,12 @@ const App = () => {
             ) : (
               <>
                 <button onClick={startLottery}>Start Lottery</button>
-                <button onClick={getOwner}>Get Owner</button>
+                {/* <button onClick={getOwner}>Get Owner</button> */}
                 <button onClick={enterLottery}>Enter Lottery</button>
-                <button onClick={getPlayers}>Get Players</button>
+                {/* <button onClick={getPlayers}>Get Players</button> */}
                 <button onClick={pickWinner}>Pick Winner</button>
               </>
             )}
-
             <div>
               <div>
                 <h3>Address: {defaultAccount}</h3>
@@ -293,8 +320,8 @@ const App = () => {
                 <h3>Balance: {userBalance}</h3>
               </div>
               <div>
-                {players.map((player, index) => (
-                  <Card key={index} player={player} />
+                {players.map((p, i) => (
+                  <Card key={i} player={p} />
                 ))}
               </div>
             </div>
