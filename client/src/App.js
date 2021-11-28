@@ -6,10 +6,12 @@ import Navigation from "./components/nav/index.js";
 import getEthers from "./getEthers";
 import Connect from "./components/connect/index.js";
 
-import Input from "./components/input/index.js";
-import Layout from "./components/layout/index.js";
+// Components
+import Input from "./components/input";
+import Layout from "./components/layout";
 import ReactMarkdown from "react-markdown";
-import ReadMe from "./components/readme/index.js";
+import ReadMe from "./components/readme";
+import Card from "./components/card";
 
 // Contracts
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
@@ -47,9 +49,11 @@ const App = () => {
   // FOR POWERBALLERS
   const [players, setPlayers] = useState([]);
 
+  /////////////////////////////////////////////////////////////////////////
+  //                              SETUP ETHERS
+  /////////////////////////////////////////////////////////////////////////
+
   const setupEthers = async () => {
-    // Ethers
-    // This gets all the main values required to interact with the contracts
     const ethers = await getEthers();
     const networkId = await Powerballer.networks;
 
@@ -57,10 +61,14 @@ const App = () => {
     const deployedContract = Powerballer.networks[network[0]].address;
     const deployedContractABI = Powerballer.abi;
 
-    // Set the basic values
+    // Set state for Contract and ABI
     setCurrentContractVal(deployedContract);
     setCurrentAbiVal(deployedContractABI);
   };
+
+  /////////////////////////////////////////////////////////////////////////
+  //                              CONNECT WALLET
+  /////////////////////////////////////////////////////////////////////////
 
   const connectWalletHandler = () => {
     // 1. Check for MetaMask and & Ethereum
@@ -75,10 +83,10 @@ const App = () => {
         })
         // 3. Then set the provider  and the signer
         .then(() => {
-          let tempProvider = new ethers.providers.Web3Provider(window.ethereum);
-          let tempSigner = tempProvider.getSigner();
-          setSigner(tempSigner);
-          setProvider(tempProvider);
+          let provider = new ethers.providers.Web3Provider(window.ethereum);
+          let signer = provider.getSigner();
+          setSigner(signer);
+          setProvider(provider);
         })
         .catch((error) => {
           setErrorMessage(error.message);
@@ -88,12 +96,18 @@ const App = () => {
     }
   };
 
-  // update account, will cause component re-render
+  /////////////////////////////////////////////////////////////////////////
+  //                              ACCOUNT CHANGE HANDLER
+  /////////////////////////////////////////////////////////////////////////
   const accountChangedHandler = (newAccount) => {
     setDefaultAccount(newAccount);
     getAccountBalance(newAccount.toString());
     updateEthers();
   };
+
+  /////////////////////////////////////////////////////////////////////////
+  //                              UPDATE ETHERS
+  /////////////////////////////////////////////////////////////////////////
 
   const updateEthers = () => {
     const network = Object.keys(Powerballer.networks);
@@ -107,8 +121,13 @@ const App = () => {
       contractABI,
       signer
     );
+
     setContract(tempContract);
   };
+
+  /////////////////////////////////////////////////////////////////////////
+  //                              GET ACCOUNT BALANCE
+  /////////////////////////////////////////////////////////////////////////
 
   const getAccountBalance = (account) => {
     window.ethereum
@@ -150,12 +169,8 @@ const App = () => {
     );
 
     const tx = await contract.startLottery();
-
     const receipt = await tx.wait();
-
     const { confirmations, transactionHash } = receipt;
-
-    console.log(confirmations, transactionHash);
 
     setTransactionConfirms(confirmations);
     setTransactionHash(transactionHash);
@@ -175,12 +190,9 @@ const App = () => {
     );
 
     const tx = await contract.pickWinner();
-
     const receipt = await tx.wait();
-
     const { confirmations, transactionHash } = receipt;
 
-    console.log(confirmations, transactionHash);
     console.log("Winner was picked");
   };
 
@@ -196,6 +208,7 @@ const App = () => {
     );
 
     const players = await contract.getPlayers();
+    setPlayers(players);
   };
 
   /////////////////////////////////////////////////////////////////////////
@@ -227,12 +240,17 @@ const App = () => {
     });
   };
 
+  /////////////////////////////////////////////////////////////////////////
+
+  /////////////////////////////////////////////////////////////////////////
+  //                              CHAIN CHANGE HANDLER
+  /////////////////////////////////////////////////////////////////////////
   const chainChangedHandler = async () => {
-    // reload the page on any change to avoid any errors with chain
+    // Reload the page on any change to avoid any errors with chain
     window.location.reload();
   };
 
-  // listen for account changes
+  // Listen for account or chain changes
   window.ethereum.on("accountsChanged", accountChangedHandler);
   window.ethereum.on("chainChanged", chainChangedHandler);
 
@@ -275,12 +293,9 @@ const App = () => {
                 <h3>Balance: {userBalance}</h3>
               </div>
               <div>
-                <div>
-                  Players:{" "}
-                  {players.map((player) => {
-                    console.log("map", player);
-                  })}
-                </div>
+                {players.map((player, index) => (
+                  <Card key={index} player={player} />
+                ))}
               </div>
             </div>
           </>
