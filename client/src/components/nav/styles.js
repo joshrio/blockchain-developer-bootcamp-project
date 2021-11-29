@@ -21,12 +21,12 @@ export const Wallet = styled.div`
   cursor: pointer;
 `;
 
-export const Icon = styled.div`
-  height: 28px;
-  width: 28px;
-  background: #2a2a2a;
+export const Icon = styled.img`
+  height: 44px;
+  width: 44px;
   border-radius: 8px;
-  padding: 12px;
+  padding: 4px;
+  border: 1px solid #e0e0e0;
 `;
 
 export const Project = styled.div`

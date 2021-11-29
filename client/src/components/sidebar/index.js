@@ -4,7 +4,7 @@ import React from "react";
 // Relative Imports
 import { Container, Button, EmptyState, MetaMask, Description } from "./styles";
 import Connect from "../connect";
-import metamask from "../../assets/metamask-fox-wordmark-stacked.svg";
+import metamask from "../../assets/metamask.svg";
 
 const Sidebar = ({
   connect,
