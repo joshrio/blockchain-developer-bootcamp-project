@@ -9,7 +9,7 @@ const Card = ({ player, reciept, confirmations }) => {
   return (
     <Container>
       <Icon>
-        <Jdenticon size="52" value={player} />
+        <Jdenticon size="64" value={player} />
       </Icon>
       <p>{player}</p>
       <p>{reciept}</p>

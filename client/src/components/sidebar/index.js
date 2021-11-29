@@ -2,8 +2,9 @@
 import React from "react";
 
 // Relative Imports
-import { Container, Button } from "./styles";
+import { Container, Button, EmptyState, MetaMask, Description } from "./styles";
 import Connect from "../connect";
+import metamask from "../../assets/metamask-fox-wordmark-stacked.svg";
 
 const Sidebar = ({
   connect,
@@ -25,15 +26,41 @@ const Sidebar = ({
     }
   };
 
+  console.log(address);
+
   return (
     <Container>
-      <h2>Enter Lottery</h2>
-      <p>{balance}</p>
-      <p>{formatAddress()}</p>
-      <Button onClick={connect}>{walletLabel}</Button>
-      <Button onClick={pickWinner}>Pick Winner</Button>
-      <Button onClick={startLottery}>Start Lottery</Button>
-      <Button onClick={enterLottery}>Enter Lottery</Button>
+      <>
+        <h2>Enter Lottery</h2>
+        <>
+          {address !== null && (
+            <>
+              <p>{balance}</p>
+              <p>{formatAddress()}</p>
+            </>
+          )}
+        </>
+      </>
+      <EmptyState>
+        <>
+          <MetaMask src={metamask} />
+          <Description>
+            To get started using Powerballer please connect your Metamask wallet
+          </Description>
+        </>
+      </EmptyState>
+      <>
+        {address === null && <Button onClick={connect}>{walletLabel}</Button>}
+        {address !== null && address === owner && (
+          <>
+            <Button onClick={pickWinner}>Pick Winner</Button>
+            <Button onClick={startLottery}>Start Lottery</Button>
+          </>
+        )}
+        {address !== null && address !== owner && (
+          <Button onClick={enterLottery}>Enter Lottery</Button>
+        )}
+      </>
     </Container>
   );
 };
