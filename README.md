@@ -21,3 +21,11 @@ If running the project via Ganache/Truffle then the instructor needs to run the 
 
 Public address for NFT certification: `0x...`
 [Etherscan](https://etherscan.io/) link for QR:
+
+## Course Requirements
+
+The project has a folder called `requirements` that hosts a number of documents as required by the submission details. This folder includes
+
+- design_pattern_decisions.md
+- avoiding_common_attacks.md
+- deployed_address.txt
