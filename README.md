@@ -1,0 +1,23 @@
+# Powerballer
+
+## Overview
+
+Powerballer is a basic lottery contract that enables people to buy tickets in a lottery. There's two roles, one is a owner/admin and the other is a player. The tickets to the lottery cost 0.01 ETH and the admin randomly selects a winner and the funds are transferred to the winner.
+
+## Frontend Project
+
+The project has a basic directory structure of the following:
+
+- client
+- contracts
+- migrations
+- tests
+
+The frontend project can be found in `/client` and requires the instructor to `npm install` and then `npm run start` to get the dApplication working.
+
+If running the project via Ganache/Truffle then the instructor needs to run the `truffle develop` to enter the developer console then `compile` and `migrate` to get the local environment running.
+
+## Public Ethereum address
+
+Public address for NFT certification: `0x...`
+[Etherscan](https://etherscan.io/) link for QR:
