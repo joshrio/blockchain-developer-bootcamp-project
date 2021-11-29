@@ -243,7 +243,7 @@ const App = () => {
   //                              ENTER LOTTERY
   /////////////////////////////////////////////////////////////////////////
 
-  const enterLottery = () => {
+  const enterLottery = async () => {
     let gas_limit = "0x100000";
     let gas_price = provider.getGasPrice();
 
@@ -261,12 +261,26 @@ const App = () => {
       gasPrice: gas_price,
     };
 
-    contract.enterLottery(tx).then((transaction) => {
-      // console.log(transaction);
-      const { confirmations, transactionHash } = transaction;
-      setTicketHash(transactionHash);
-      setTicketConfirms(confirmations);
-    });
+    contract
+      .enterLottery(tx)
+      .then((transaction) => {
+        // console.log(transaction);
+        const { confirmations, transactionHash } = transaction;
+        setTicketHash(transactionHash);
+        setTicketConfirms(confirmations);
+      })
+      .catch((e) => {
+        switch (e.code) {
+          case 4001:
+            return console.log("4001: Rejected transation");
+          case -32602:
+            return console.log("-32602: Params are invalid");
+          case -32603:
+            return console.log("-32603: Oh shit, something went wrong");
+            break;
+          default:
+        }
+      });
   };
 
   /////////////////////////////////////////////////////////////////////////
