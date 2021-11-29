@@ -14,6 +14,7 @@ import ReadMe from "./components/readme";
 import Card from "./components/card";
 import Wallet from "./components/wallet";
 import Sidebar from "./components/sidebar";
+import Empty from "./components/empty";
 
 // Contracts
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
@@ -190,9 +191,31 @@ const App = () => {
       signer
     );
 
-    const tx = await contract.pickWinner();
-    const receipt = await tx.wait();
-    const { confirmations, transactionHash } = receipt;
+    contract
+      .pickWinner()
+      .then((transaction) => {
+        const { confirmations, transactionHash } = transaction;
+        console.log(
+          "confirmations",
+          confirmations,
+          "transactionHash",
+          transactionHash
+        );
+      })
+      .catch((e) => {
+        switch (e.code) {
+          case 4001:
+            return console.log("4001: Rejected transation");
+          case -32602:
+            return console.log("-32602: Params are invalid");
+          case -32603:
+            return console.log("-32603: Oh shit, something went wrong");
+            break;
+          default:
+        }
+      });
+    // const receipt = await tx.wait();
+    // const { confirmations, transactionHash } = receipt;
 
     console.log("Winner was picked");
   };
@@ -314,14 +337,18 @@ const App = () => {
         return (
           <>
             <h1>Powerballer Lottery</h1>
-            {players.map((p, i) => (
-              <Card
-                key={i}
-                player={p}
-                reciept={ticketHash}
-                confirmations={ticketConfirms}
-              />
-            ))}
+            {players.length === 0 ? (
+              <Empty />
+            ) : (
+              players.map((p, i) => (
+                <Card
+                  key={i}
+                  player={p}
+                  reciept={ticketHash}
+                  confirmations={ticketConfirms}
+                />
+              ))
+            )}
           </>
         );
       case "walkthrough":

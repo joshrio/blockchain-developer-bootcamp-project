@@ -49,15 +49,16 @@ const Sidebar = ({
       </EmptyState>
       <>
         {address === null && <Button onClick={connect}>{walletLabel}</Button>}
-        {address !== null && address === owner && (
+        {address === owner && (
           <>
             <Button onClick={pickWinner}>Pick Winner</Button>
-            <Button onClick={startLottery}>Start Lottery</Button>
           </>
         )}
         {address !== null && address !== owner && (
           <Button onClick={enterLottery}>Enter Lottery</Button>
         )}
+        <Button onClick={startLottery}>Start Lottery</Button>
+        <Button onClick={pickWinner}>Pick Winner</Button>
       </>
     </Container>
   );
