@@ -3,17 +3,19 @@ import React from "react";
 import Jdenticon from "react-jdenticon";
 
 // Relative Imports
-import { Container, Icon } from "./styles";
+import { Container, Icon, Row, Player } from "./styles";
 
 const Card = ({ player, reciept, confirmations }) => {
   return (
     <Container>
-      <Icon>
-        <Jdenticon size="64" value={player} />
-      </Icon>
-      <p>{player}</p>
+      <Row>
+        <Icon>
+          <Jdenticon size="64" value={player} />
+        </Icon>
+        <Player>{player}</Player>
+      </Row>
       <p>{reciept}</p>
-      <p>{confirmations}</p>
+      {/*   <p>{confirmations}</p> */}
     </Container>
   );
 };
