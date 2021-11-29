@@ -19,8 +19,8 @@ If running the project via Ganache/Truffle then the instructor needs to run the 
 
 ## Public Ethereum address
 
-- Public address for NFT certification: `0xe24a951c2bd93197bcBe03b6Fa5507C61946F4b0`
-- [Etherscan](https://etherscan.io/address/0xe24a951c2bd93197bcBe03b6Fa5507C61946F4b0) link
+- Ethereum Address for NFT certification: `0xe24a951c2bd93197bcBe03b6Fa5507C61946F4b0`
+- [Etherscan link](https://etherscan.io/address/0xe24a951c2bd93197bcBe03b6Fa5507C61946F4b0)
 
 ## Course Requirements
 
