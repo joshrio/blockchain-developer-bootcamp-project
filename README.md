@@ -8,10 +8,10 @@ Powerballer is a basic lottery contract that enables people to buy tickets in a 
 
 The project has a basic directory structure of the following:
 
-- client
-- contracts
-- migrations
-- tests
+- [client](https://github.com/joshrio/blockchain-developer-bootcamp-project/tree/main/client)
+- [contracts](https://github.com/joshrio/blockchain-developer-bootcamp-project/tree/main/contracts)
+- [migrations](https://github.com/joshrio/blockchain-developer-bootcamp-project/tree/main/migrations)
+- [tests](https://github.com/joshrio/blockchain-developer-bootcamp-project/tree/main/test)
 
 The frontend project can be found in `/client` and requires the instructor to `npm install` and then `npm run start` to get the dApplication working.
 
@@ -26,6 +26,6 @@ Public address for NFT certification: `0x...`
 
 The project has a folder called `requirements` that hosts a number of documents as required by the submission details. This folder includes
 
-- design_pattern_decisions.md
-- avoiding_common_attacks.md
-- deployed_address.txt
+- [design_pattern_decisions.md](https://github.com/joshrio/blockchain-developer-bootcamp-project/blob/main/requirements/design_pattern_decisions.md)
+- [avoiding_common_attacks.md](https://github.com/joshrio/blockchain-developer-bootcamp-project/blob/main/requirements/avoiding_common_attacks.md)
+- [deployed_address.txt](https://github.com/joshrio/blockchain-developer-bootcamp-project/blob/main/requirements/deployed_address.txt)
