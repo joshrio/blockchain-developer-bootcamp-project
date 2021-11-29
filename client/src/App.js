@@ -165,8 +165,6 @@ const App = () => {
   /////////////////////////////////////////////////////////////////////////
 
   const startLottery = async () => {
-    console.log("startLottery");
-
     const contract = new ethers.Contract(
       currentContractVal,
       currentContractABI,
@@ -268,8 +266,6 @@ const App = () => {
       const { confirmations, transactionHash } = transaction;
       setTicketHash(transactionHash);
       setTicketConfirms(confirmations);
-
-      console.log("Send finished!");
     });
   };
 
@@ -304,25 +300,14 @@ const App = () => {
         return (
           <>
             <h1>Powerballer Lottery</h1>
-            {/*
-            <button onClick={startLottery}>Start Lottery</button>
-            <button onClick={getOwner}>Get Owner</button>
-            <button onClick={getPlayers}>Get Players</button>
-            <button onClick={pickWinner}>Pick Winner</button>
-            */}
-
-            <div>
-              <div>
-                {players.map((p, i) => (
-                  <Card
-                    key={i}
-                    player={p}
-                    reciept={ticketHash}
-                    confirmations={ticketConfirms}
-                  />
-                ))}
-              </div>
-            </div>
+            {players.map((p, i) => (
+              <Card
+                key={i}
+                player={p}
+                reciept={ticketHash}
+                confirmations={ticketConfirms}
+              />
+            ))}
           </>
         );
       case "walkthrough":
