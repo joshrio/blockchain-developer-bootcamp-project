@@ -26,8 +26,6 @@ const Sidebar = ({
     }
   };
 
-  console.log(address);
-
   return (
     <Container>
       <>
