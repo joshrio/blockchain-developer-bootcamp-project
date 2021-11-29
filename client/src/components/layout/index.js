@@ -15,6 +15,9 @@ const Layout = ({
   pickWinner,
   startLottery,
   enterLottery,
+  signer,
+  owner,
+  players,
 }) => {
   return (
     <Container>
@@ -24,9 +27,6 @@ const Layout = ({
           <Item onClick={() => renderComponent("readme")}>Readme</Item>
           <Item onClick={() => renderComponent("application")}>
             Powerballer
-          </Item>
-          <Item onClick={() => renderComponent("walkthrough")}>
-            Walkthrough
           </Item>
         </List>
       </Menu>
@@ -39,6 +39,9 @@ const Layout = ({
         pickWinner={pickWinner}
         startLottery={startLottery}
         enterLottery={enterLottery}
+        signer={signer}
+        owner={owner}
+        players={players}
       />
     </Container>
   );

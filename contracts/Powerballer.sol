@@ -39,7 +39,7 @@ contract Powerballer {
     uint index = randomGenerator() % players.length;
     // Take index value, get the player of that index in the array and transfer money
     players[index].transfer(address(this).balance);
-    // Clear the array of players
+    // Reset the list of players array
     players = new address payable [](0);
   }
 

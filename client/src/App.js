@@ -27,14 +27,6 @@ const App = () => {
   const [userBalance, setUserBalance] = useState(null);
   const [connButtonText, setConnButtonText] = useState("Connect Wallet");
 
-  // FOR TEXT
-  // const [storedText, setStoredText] = useState("");
-  // const [storedChainText, setStoredChainText] = useState("");
-
-  // FOR NUMBER
-  // const [storageValue, setStorageValue] = useState("");
-  // const [storedChainValue, setStoredChainValue] = useState("");
-
   // FOR CONTRACT
   const [currentContractVal, setCurrentContractVal] = useState(null);
   const [currentContractABI, setCurrentAbiVal] = useState(null);
@@ -84,8 +76,8 @@ const App = () => {
         .request({ method: "eth_requestAccounts" })
         .then((result) => {
           accountChangedHandler(result[0]);
-          setConnButtonText("Wallet Connected");
           getAccountBalance(result[0]);
+          setConnButtonText("Wallet Connected");
         })
         // 3. Then set the provider  and the signer
         .then(() => {
@@ -147,21 +139,6 @@ const App = () => {
   };
 
   /////////////////////////////////////////////////////////////////////////
-  //                              GET OWNER
-  /////////////////////////////////////////////////////////////////////////
-  //
-  // const getOwner = async () => {
-  //   const contract = new ethers.Contract(
-  //     currentContractVal,
-  //     currentContractABI,
-  //     provider
-  //   );
-  //
-  //   const owner = await contract.owner();
-  //   console.log("owner", owner);
-  // };
-
-  /////////////////////////////////////////////////////////////////////////
   //                              START LOTTERY
   /////////////////////////////////////////////////////////////////////////
 
@@ -175,9 +152,6 @@ const App = () => {
     const tx = await contract.startLottery();
     const receipt = await tx.wait();
     const { confirmations, transactionHash } = receipt;
-
-    // setTransactionConfirms(confirmations);
-    // setTransactionHash(transactionHash);
   };
 
   /////////////////////////////////////////////////////////////////////////
@@ -191,31 +165,11 @@ const App = () => {
       signer
     );
 
-    contract
-      .pickWinner()
-      .then((transaction) => {
-        const { confirmations, transactionHash } = transaction;
-        console.log(
-          "confirmations",
-          confirmations,
-          "transactionHash",
-          transactionHash
-        );
-      })
-      .catch((e) => {
-        switch (e.code) {
-          case 4001:
-            return console.log("4001: Rejected transation");
-          case -32602:
-            return console.log("-32602: Params are invalid");
-          case -32603:
-            return console.log("-32603: Oh shit, something went wrong");
-            break;
-          default:
-        }
-      });
-    // const receipt = await tx.wait();
-    // const { confirmations, transactionHash } = receipt;
+    const tx = await contract.pickWinner();
+    const receipt = await tx.wait();
+    const { confirmations, transactionHash } = receipt;
+    console.log(tx);
+    console.log(receipt);
 
     console.log("Winner was picked");
   };
@@ -242,25 +196,11 @@ const App = () => {
       const players = await readOnly.getPlayers();
       const owner = await readOnly.owner();
 
+      setOwner(owner);
       setPlayers(players);
       setReadOnlyContract(readOnly);
     }
   };
-  /////////////////////////////////////////////////////////////////////////
-  //                              GET PLAYERS
-  /////////////////////////////////////////////////////////////////////////
-
-  // const getPlayers = async () => {
-  // const contract = new ethers.Contract(
-  //   currentContractVal,
-  //   currentContractABI,
-  //   provider
-  // );
-  //
-  // const players = await readOnlyContract.getPlayers();
-  // console.log("Players,", players);
-  //   setPlayers(players);
-  // };
 
   /////////////////////////////////////////////////////////////////////////
   //                              ENTER LOTTERY
@@ -337,6 +277,7 @@ const App = () => {
         return (
           <>
             <h1>Powerballer Lottery</h1>
+            {}
             {players.length === 0 ? (
               <Empty />
             ) : (
@@ -359,6 +300,7 @@ const App = () => {
   };
 
   setupEthers();
+  setupReadOnlyContract();
 
   /////////////////////////////////////////////////////////////////////////
   //                              CONSOLE.LOGS
@@ -366,7 +308,7 @@ const App = () => {
 
   return (
     <>
-      <Navigation onClick={connectWalletHandler} label={connButtonText} />
+      <Navigation connectWallet={connectWalletHandler} label={connButtonText} />
       <Layout
         renderComponent={renderComponent}
         address={defaultAccount}
@@ -379,6 +321,8 @@ const App = () => {
         startLottery={startLottery}
         owner={owner}
         enterLottery={enterLottery}
+        signer={signer}
+        players={players}
       >
         {renderItems()}
       </Layout>
