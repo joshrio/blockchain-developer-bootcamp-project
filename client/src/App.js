@@ -153,6 +153,7 @@ const App = () => {
     const tx = await contract.startLottery();
     const receipt = await tx.wait();
     const { confirmations, transactionHash } = receipt;
+    console.log("Confirmation", transactionHash);
   };
 
   /////////////////////////////////////////////////////////////////////////
@@ -178,26 +179,30 @@ const App = () => {
   /////////////////////////////////////////////////////////////////////////
 
   const setupReadOnlyContract = async () => {
-    if (readOnlyContract === null) {
-      let provider = new ethers.providers.Web3Provider(window.ethereum);
-      let network = Object.keys(Powerballer.networks);
+    try {
+      if (readOnlyContract === null) {
+        let provider = new ethers.providers.Web3Provider(window.ethereum);
+        let network = Object.keys(Powerballer.networks);
 
-      // Set these else where and call from state
-      let contractAddress = Powerballer.networks[network[0]].address;
-      let contractABI = Powerballer.abi;
+        // Set these else where and call from state
+        let contractAddress = Powerballer.networks[network[0]].address;
+        let contractABI = Powerballer.abi;
 
-      let readOnly = new ethers.Contract(
-        contractAddress,
-        contractABI,
-        provider
-      );
+        let readOnly = new ethers.Contract(
+          contractAddress,
+          contractABI,
+          provider
+        );
 
-      const players = await readOnly.getPlayers.call();
-      const owner = await readOnly.owner.call();
+        const players = await readOnly.getPlayers.call();
+        const owner = await readOnly.owner.call();
 
-      setOwner(owner);
-      setPlayers(players);
-      setReadOnlyContract(readOnly);
+        setOwner(owner);
+        setPlayers(players);
+        setReadOnlyContract(readOnly);
+      }
+    } catch (e) {
+      console.log("error", e);
     }
   };
 
@@ -281,7 +286,7 @@ const App = () => {
           <>
             <h1>Powerballer Lottery</h1>
             {players.length === 0 ? (
-              <Empty />
+              <Empty owner={owner} startLottery={startLottery} />
             ) : (
               players.map((p, i) => (
                 <Card
@@ -332,7 +337,7 @@ const App = () => {
         reciept={ticketHash}
         confirmations={ticketConfirms}
         pickWinner={pickWinner}
-        startLottery={startLottery}
+        tery={startLottery}
         owner={owner}
         enterLottery={enterLottery}
         signer={signer}

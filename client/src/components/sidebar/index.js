@@ -46,15 +46,6 @@ const Sidebar = ({
       const isSigner = signer.provider.provider.selectedAddress;
       const isOwner = owner.toLowerCase();
       const isEqual = isSigner === isOwner;
-      // && players.length > 0 ? (
-      //   <Button disabled onClick={pickWinner}>
-      //     Pick Winner
-      //   </Button>
-      // ) : (
-      //   <Button disabled onClick={startLottery}>
-      //     Start Lottery
-      //   </Button>
-      // );
 
       return isEqual;
     }
@@ -81,7 +72,7 @@ const Sidebar = ({
 
       return formattedOwner.toLowerCase();
     } else {
-      return "Lottery hasn't started";
+      return "No Admin";
     }
   };
 
@@ -158,7 +149,6 @@ const Sidebar = ({
             To end the lottery click pick winner button and the funds will be
             distributed to the winner
           </Description>
-
           <Button disabled={!checkOwner()} onClick={pickWinner}>
             Pick Winner
           </Button>

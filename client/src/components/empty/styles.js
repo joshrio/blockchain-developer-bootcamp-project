@@ -9,6 +9,7 @@ export const Container = styled.div`
   align-items: center;
   border-radius: 4px;
   border: 1px solid #d2d6dc;
+  padding: 20px;
 `;
 
 export const Placeholder = styled.img`
@@ -23,4 +24,24 @@ export const Description = styled.p`
 
 export const Emoji = styled.div`
   font-size: 200px;
+`;
+
+export const Button = styled.button`
+  height: auto;
+  width: 100%;
+  background: #2a2a2a;
+  border-radius: 4px;
+  padding: 12px 16px;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  border: none;
+  font-size: 16px;
+
+  &:disabled {
+    cursor: not-allowed;
+    color: #999;
+  }
 `;
