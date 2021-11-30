@@ -1,13 +1,19 @@
 pragma solidity >=0.5.0;
-import  "./Ownable.sol";
 
-contract Powerballer is Ownable {
+contract Powerballer {
 
   // Set the variables for the two participants
+  address public owner;
   address payable[] public players;
 
+  // Create access controll for the owner/deployer
+  modifier isOwner(){
+    require(msg.sender == owner);
+    _;
+  }
+
   // Manually Start the lottery
-  function startLottery() public isOwner {
+  function startLottery() public {
     // Owner the owner create start the lottery
     owner = msg.sender;
   }
