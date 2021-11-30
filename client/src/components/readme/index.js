@@ -31,7 +31,7 @@ If running the project via Ganache/Truffle then the instructor needs to run the 
 
 ## Frontend Application
 
-The frontend code running at [consensys-bootcamp-project](https://consensys-bootcamp-project.herokuapp.com/) or on [localhost](http://localhost:3000/) has five main sections for ease of use.
+The frontend code running at [consensys-bootcamp-project](https://joshrio.github.io/blockchain-developer-bootcamp-project/) or on [localhost](http://localhost:3000/) has five main sections for ease of use.
 
 - Screencast: A video walkthrough of the project
 - Readme: This file that you're reading
