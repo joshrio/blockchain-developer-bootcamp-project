@@ -1,10 +1,10 @@
-## Overview
+# Overview
 
 Powerballer is a basic lottery contract that enables people to buy tickets in a lottery. There's two roles, one is a owner/admin and the other is a player. The tickets to the lottery cost 0.01 ETH and the admin randomly selects a winner and the funds are transferred to the winner.
 
 ## Screencast
 
-[Walktrough](https://www.youtube.com/watch?v=Kh0kivKQX6c)
+[Screencast Walktrough](https://www.youtube.com/watch?v=Kh0kivKQX6c)
 
 ## Frontend Code
 
@@ -22,7 +22,7 @@ If running the project via Ganache/Truffle then the instructor needs to run the 
 
 ## Frontend Application
 
-The frontend code running at [website](https://github.com) or on [localhost](http://localhost:3000/) has five main sections for ease of use.
+The frontend code running at [consensys-bootcamp-project](https://consensys-bootcamp-project.herokuapp.com/) or on [localhost](http://localhost:3000/) has five main sections for ease of use.
 
 - Screencast: A video walkthrough of the project
 - Readme: This file that you're reading
@@ -34,6 +34,11 @@ The frontend code running at [website](https://github.com) or on [localhost](htt
 
 - Ethereum Address for NFT certification: **0xe24a951c2bd93197bcBe03b6Fa5507C61946F4b0**
 - [Etherscan link](https://etherscan.io/address/0xe24a951c2bd93197bcBe03b6Fa5507C61946F4b0)
+
+## Ropsten Deployed Contract
+
+- Deployed Contract Address: **0x00e856a1154F09A9f219aA75bBBcfF0b467BB747**
+- [Ropsten Explorer Contract Link](https://ropsten.etherscan.io/address/0x00e856a1154f09a9f219aa75bbbcff0b467bb747)
 
 ## Course Requirements
 
