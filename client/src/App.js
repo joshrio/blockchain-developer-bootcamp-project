@@ -41,7 +41,7 @@ const App = () => {
   const [ticketConfirms, setTicketConfirms] = useState(null);
 
   // FOR LAYOUT
-  const [currentItem, setCurrentItem] = useState("screencast");
+  const [currentItem, setCurrentItem] = useState("application");
 
   // FOR ROLES
   const [players, setPlayers] = useState([]);
