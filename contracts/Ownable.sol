@@ -5,8 +5,9 @@ contract Ownable {
     // Create a public variable called owner
     address public owner;
 
-    // On intialization make the msg.sender the owner
+    // On intialization call the constructor
     constructor() public {
+      /* Make the msg.sender the owner */
         owner = msg.sender;
     }
 
