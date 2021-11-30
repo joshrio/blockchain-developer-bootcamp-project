@@ -12,7 +12,7 @@ Powerballer is a basic lottery contract that enables people to buy tickets in a 
 
 ## Screencast
 
-[walktrough](https://www.youtube.com/watch?v=Kh0kivKQX6c)
+[Screencast Walktrough](https://www.youtube.com/watch?v=Kh0kivKQX6c)
 
 ## Frontend Code
 
