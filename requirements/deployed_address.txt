@@ -7,4 +7,5 @@
 
 ## Ropsten Testnet
 
-- Deployed Address: `0x...`
+- Deployed Contract Address: **0x00e856a1154F09A9f219aA75bBBcfF0b467BB747**
+- [Ropsten Explorer Contract Link](https://ropsten.etherscan.io/address/0x00e856a1154f09a9f219aa75bbbcff0b467bb747)
