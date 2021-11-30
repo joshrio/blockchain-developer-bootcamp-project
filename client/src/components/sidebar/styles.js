@@ -22,7 +22,7 @@ export const Container = styled.div`
 
 export const Button = styled.button`
   height: auto;
-  width: auto;
+  width: 100%;
   background: #2a2a2a;
   border-radius: 4px;
   padding: 12px 16px;
@@ -31,7 +31,6 @@ export const Button = styled.button`
   display: flex;
   justify-content: center;
   margin-top: 20px;
-  margin-bottom: 30px;
   border: none;
   font-size: 16px;
 
@@ -42,21 +41,22 @@ export const Button = styled.button`
 `;
 
 export const EmptyState = styled.div`
-  height: 100%;
   display: flex;
-  justify-content: center;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
 `;
 
-export const MetaMask = styled.img`
-  height: auto;
-  width: auto;
+export const Image = styled.img`
+  height: 80%;
+  width: 80%;
+`;
+
+export const Emoji = styled.div`
+  font-size: 200px;
 `;
 
 export const Description = styled.p`
   text-align: center;
-  margin-top: -28px;
   line-height: 24px;
 `;
 
@@ -67,6 +67,7 @@ export const Tabs = styled.div`
   border-radius: 4px;
   border: 1px solid #d2d6dc;
   overflow: hidden;
+  margin-bottom: 20px;
 `;
 
 export const Tab = styled.button`

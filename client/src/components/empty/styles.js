@@ -20,3 +20,7 @@ export const Description = styled.p`
   text-align: center;
   line-height: 24px;
 `;
+
+export const Emoji = styled.div`
+  font-size: 200px;
+`;

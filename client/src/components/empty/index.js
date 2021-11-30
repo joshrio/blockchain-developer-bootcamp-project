@@ -2,13 +2,13 @@
 import React from "react";
 
 // Relative Imports
-import { Container, Placeholder, Description } from "./styles";
+import { Container, Placeholder, Description, Emoji } from "./styles";
 import logo from "../../assets/powerballer.svg";
 
 const Empty = () => {
   return (
     <Container>
-      <Placeholder src={logo} />
+      <Emoji>💸</Emoji>
       <Description>
         The Powerballer Lottery has begun but there are currently 0 players. If
         you're not the owner of the lottery then you can{" "}

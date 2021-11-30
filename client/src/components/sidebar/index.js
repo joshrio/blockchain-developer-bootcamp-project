@@ -6,7 +6,7 @@ import {
   Container,
   Button,
   EmptyState,
-  MetaMask,
+  Image,
   Description,
   Tabs,
   Tab,
@@ -14,9 +14,16 @@ import {
   Row,
   Key,
   Value,
+  Emoji,
 } from "./styles";
 import Connect from "../connect";
 import metamask from "../../assets/metamask.svg";
+import powerball from "../../assets/powerballer.svg";
+
+// Assets for placeholder empty states
+import isOwner from "../../assets/admin.svg";
+import isPlayer from "../../assets/player.svg";
+import isEmpty from "../../assets/empty.svg";
 
 const Sidebar = ({
   balance,
@@ -39,16 +46,17 @@ const Sidebar = ({
       const isSigner = signer.provider.provider.selectedAddress;
       const isOwner = owner.toLowerCase();
       const isEqual = isSigner === isOwner;
+      // && players.length > 0 ? (
+      //   <Button disabled onClick={pickWinner}>
+      //     Pick Winner
+      //   </Button>
+      // ) : (
+      //   <Button disabled onClick={startLottery}>
+      //     Start Lottery
+      //   </Button>
+      // );
 
-      return isEqual && players.length > 0 ? (
-        <Button disabled onClick={pickWinner}>
-          Pick Winner
-        </Button>
-      ) : (
-        <Button disabled onClick={startLottery}>
-          Start Lottery
-        </Button>
-      );
+      return isEqual;
     }
   };
 
@@ -79,7 +87,6 @@ const Sidebar = ({
 
   const formatBalance = () => {
     if (balance !== null) {
-      // console.log(typeof balance.toNumber());
       const toNumber = parseFloat(balance);
       const rounded = toNumber.toFixed(4);
       return rounded;
@@ -105,49 +112,57 @@ const Sidebar = ({
           </Row>
         </Overview>
       </>
-      <Tabs>
-        <Tab
-          isActive={role === "player" ? true : false}
-          onClick={() => setRole("player")}
-          disabled={false}
-        >
-          Player
-        </Tab>
-        <Tab
-          isActive={role === "owner" ? true : false}
-          onClick={() => setRole("owner")}
-          disabled={!checkOwner()}
-        >
-          Owner
-        </Tab>
-      </Tabs>
+
+      {address !== null && (
+        <Tabs>
+          <Tab
+            isActive={role === "player" ? true : false}
+            onClick={() => setRole("player")}
+            disabled={false}
+          >
+            Player
+          </Tab>
+          <Tab
+            isActive={role === "owner" ? true : false}
+            onClick={() => setRole("owner")}
+          >
+            Owner
+          </Tab>
+        </Tabs>
+      )}
+
       {address === null && (
         <EmptyState>
-          <>
-            <MetaMask src={metamask} />
-            <Description>
-              To get started using Powerballer please connect your Metamask
-              wallet
-            </Description>
-          </>
+          <Emoji>🦁</Emoji>
+          <Description>
+            To get started using Powerballer please connect your Metamask wallet
+          </Description>
         </EmptyState>
       )}
 
-      {role === "player" ? (
-        <Button
-          disabled={signer === null ? true : false}
-          onClick={enterLottery}
-        >
-          Enter Lottery
-        </Button>
-      ) : (
-        <>
-          {players.length > 0 ? (
-            <Button onClick={pickWinner}>Pick Winner</Button>
-          ) : (
-            <Button onClick={startLottery}>Start Lottery</Button>
-          )}
-        </>
+      {address !== null && role === "player" && (
+        <EmptyState>
+          <Emoji>🎟</Emoji>
+          <Description>To enter Powerballer please buy a ticket</Description>
+
+          <Button disabled={checkOwner()} onClick={enterLottery}>
+            Enter Lottery
+          </Button>
+        </EmptyState>
+      )}
+
+      {address !== null && role === "owner" && (
+        <EmptyState>
+          <Emoji>🧙</Emoji>
+          <Description>
+            To end the lottery click pick winner button and the funds will be
+            distributed to the winner
+          </Description>
+
+          <Button disabled={!checkOwner()} onClick={pickWinner}>
+            Pick Winner
+          </Button>
+        </EmptyState>
       )}
     </Container>
   );
