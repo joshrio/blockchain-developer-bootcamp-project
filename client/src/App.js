@@ -14,6 +14,8 @@ import Card from "./components/card";
 import Wallet from "./components/wallet";
 import Sidebar from "./components/sidebar";
 import Empty from "./components/empty";
+import Attacks from "./components/attacks";
+import Patterns from "./components/patterns";
 import Video from "./components/video";
 
 // Contracts
@@ -39,7 +41,7 @@ const App = () => {
   const [ticketConfirms, setTicketConfirms] = useState(null);
 
   // FOR LAYOUT
-  const [currentItem, setCurrentItem] = useState("application");
+  const [currentItem, setCurrentItem] = useState("screencast");
 
   // FOR ROLES
   const [players, setPlayers] = useState([]);
@@ -260,10 +262,10 @@ const App = () => {
 
   const renderItems = () => {
     switch (currentItem) {
-      case "project":
+      case "screencast":
         return (
           <>
-            <h1>Project</h1>
+            <h1>Screencast</h1>
             <Video />
           </>
         );
@@ -292,19 +294,18 @@ const App = () => {
             )}
           </>
         );
-      case "walkthrough":
+      case "patterns":
         return (
           <>
-            <h1>Walkthrough</h1>
-            <iframe
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/aWuAgwsYNAA"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
+            <h1>Design Patterns</h1>
+            <Patterns />
+          </>
+        );
+      case "attacks":
+        return (
+          <>
+            <h1>Common Attacks</h1>
+            <Attacks />
           </>
         );
         break;

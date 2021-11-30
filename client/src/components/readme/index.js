@@ -10,19 +10,30 @@ const markdown = `
 
 Powerballer is a basic lottery contract that enables people to buy tickets in a lottery. There's two roles, one is a owner/admin and the other is a player. The tickets to the lottery cost 0.01 ETH and the admin randomly selects a winner and the funds are transferred to the winner.
 
-## Frontend Project
+## Frontend Code
 
 The project has a basic directory structure of the following:
 
 - [client](https://github.com/joshrio/blockchain-developer-bootcamp-project/tree/main/client)
 - [contracts](https://github.com/joshrio/blockchain-developer-bootcamp-project/tree/main/contracts)
 - [migrations](https://github.com/joshrio/blockchain-developer-bootcamp-project/tree/main/migrations)
+- [requirements](https://github.com/joshrio/blockchain-developer-bootcamp-project/tree/main/requirements)
 - [tests](https://github.com/joshrio/blockchain-developer-bootcamp-project/blob/main/test/powerballer.js)
 
 
 The frontend project can be found in **/client** and requires the instructor to **npm install** and then **npm run start** to get the dApplication working.
 
-If running the project via Ganache/Truffle then the instructor needs to run the **truffle develop** to enter the developer console then **compile** and **migrate** to get the local environment running.
+If running the project via Ganache/Truffle then the instructor needs to run the **truffle develop** to enter the developer console then **compile** and **migrate** to get the local environment running. You can run **test** in the developer console to see the 5 unit tests for the contract.
+
+## Frontend Application
+
+The frontend code running at [website](https://github.com) or on [localhost](http://localhost:3000/) has five main sections for ease of use.
+
+- Screencast: A video walkthrough of the project
+- Readme: This file that you're reading
+- Powerballer: Final project submission
+- Patterns: Design pattern descisions
+- Common Attacks: SWC issues that are addressed
 
 ## Public Ethereum address
 

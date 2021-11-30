@@ -24,11 +24,15 @@ const Layout = ({
     <Container>
       <Menu>
         <List>
-          <Item onClick={() => renderComponent("project")}>Project</Item>
+          <Item onClick={() => renderComponent("screencast")}>Screencast</Item>
           <Item onClick={() => renderComponent("readme")}>Readme</Item>
           <Item onClick={() => renderComponent("application")}>
             Powerballer
           </Item>
+          <Item onClick={() => renderComponent("patterns")}>
+            Design Patterns
+          </Item>
+          <Item onClick={() => renderComponent("attacks")}>Common Attacks</Item>
         </List>
       </Menu>
       <Body>{children}</Body>
