@@ -5,43 +5,42 @@ import remarkGfm from "remark-gfm";
 // Relative Imports
 
 const markdown = `
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Overview
 
-In the project directory, you can run:
+Powerballer is a basic lottery contract that enables people to buy tickets in a lottery. There's two roles, one is a owner/admin and the other is a player. The tickets to the lottery cost 0.01 ETH and the admin randomly selects a winner and the funds are transferred to the winner.
 
-### yarn start
+## Frontend Project
 
-Runs the app in the development mode.
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The project has a basic directory structure of the following:
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- [client](https://github.com/joshrio/blockchain-developer-bootcamp-project/tree/main/client)
+- [contracts](https://github.com/joshrio/blockchain-developer-bootcamp-project/tree/main/contracts)
+- [migrations](https://github.com/joshrio/blockchain-developer-bootcamp-project/tree/main/migrations)
+- [tests](https://github.com/joshrio/blockchain-developer-bootcamp-project/tree/main/test)
 
-### yarn test
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The frontend project can be found in **/client** and requires the instructor to **npm install** and then **npm run start** to get the dApplication working.
 
-### yarn build
+If running the project via Ganache/Truffle then the instructor needs to run the **truffle develop** to enter the developer console then **compile** and **migrate** to get the local environment running.
 
-Builds the app for production to the build folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Public Ethereum address
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- Ethereum Address for NFT certification: **0xe24a951c2bd93197bcBe03b6Fa5507C61946F4b0**
+- [Etherscan link](https://etherscan.io/address/0xe24a951c2bd93197bcBe03b6Fa5507C61946F4b0)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Course Requirements
+
+The project has a folder called **requirements** that hosts a number of documents as required by the submission details. This folder includes
+
+- [design_pattern_decisions.md](https://github.com/joshrio/blockchain-developer-bootcamp-project/blob/main/requirements/design_pattern_decisions.md)
+- [avoiding_common_attacks.md](https://github.com/joshrio/blockchain-developer-bootcamp-project/blob/main/requirements/avoiding_common_attacks.md)
+- [deployed_address.txt](https://github.com/joshrio/blockchain-developer-bootcamp-project/blob/main/requirements/deployed_address.txt)
+
 `;
 
 const ReadMe = () => {
-  return (
-    <ReactMarkdown
-      children={markdown}
-      remarkPlugins={[remarkGfm]}
-    ></ReactMarkdown>
-  );
+  return <ReactMarkdown children={markdown} remarkPlugins={[remarkGfm]} />;
 };
 
 export default ReadMe;

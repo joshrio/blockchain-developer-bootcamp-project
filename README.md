@@ -1,5 +1,3 @@
-# Powerballer
-
 ## Overview
 
 Powerballer is a basic lottery contract that enables people to buy tickets in a lottery. There's two roles, one is a owner/admin and the other is a player. The tickets to the lottery cost 0.01 ETH and the admin randomly selects a winner and the funds are transferred to the winner.
