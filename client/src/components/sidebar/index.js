@@ -132,6 +132,7 @@ const Sidebar = ({
           </>
         </EmptyState>
       )}
+
       {role === "player" ? (
         <Button
           disabled={signer === null ? true : false}

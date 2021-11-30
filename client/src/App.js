@@ -167,8 +167,6 @@ const App = () => {
     const tx = await contract.pickWinner();
     const receipt = await tx.wait();
     const { confirmations, transactionHash } = receipt;
-    console.log(tx);
-    console.log(receipt);
 
     console.log("Winner was picked");
   };
@@ -192,8 +190,8 @@ const App = () => {
         provider
       );
 
-      const players = await readOnly.getPlayers();
-      const owner = await readOnly.owner();
+      const players = await readOnly.getPlayers.call();
+      const owner = await readOnly.owner.call();
 
       setOwner(owner);
       setPlayers(players);
@@ -280,7 +278,6 @@ const App = () => {
         return (
           <>
             <h1>Powerballer Lottery</h1>
-            {}
             {players.length === 0 ? (
               <Empty />
             ) : (
