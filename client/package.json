@@ -4,8 +4,10 @@
   "private": true,
   "dependencies": {
     "@metamask/detect-provider": "^1.2.0",
+    "@truffle/hdwallet-provider": "^1.7.0",
     "@web3-react/core": "^6.1.9",
     "@web3-react/injected-connector": "^6.0.7",
+    "dotenv": "^10.0.0",
     "ethers": "^5.5.1",
     "jdenticon": "^3.1.1",
     "react": "16.11.0",
