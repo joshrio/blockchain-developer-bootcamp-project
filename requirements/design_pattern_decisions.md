@@ -17,3 +17,15 @@ The design patterns of the project are as follows
 13. The winner receives the balance
 14. The contract then clears the array of players and a new game can begin
 15. Repeat the game
+
+## Attack Vector Preventions
+
+1. https://swcregistry.io/docs/SWC-100
+
+- Problem: Function Default Visibility
+- Solution: Correctly define default function Visibilities
+
+2. https://swcregistry.io/docs/SWC-105
+
+- Problem: Unprotected Ether Withdrawal
+- Solution: Provide correct access control
