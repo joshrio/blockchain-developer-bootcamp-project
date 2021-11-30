@@ -15,6 +15,7 @@ import Card from "./components/card";
 import Wallet from "./components/wallet";
 import Sidebar from "./components/sidebar";
 import Empty from "./components/empty";
+import Video from "./components/video";
 
 // Contracts
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
@@ -265,7 +266,12 @@ const App = () => {
   const renderItems = () => {
     switch (currentItem) {
       case "project":
-        return <h1>Project</h1>;
+        return (
+          <>
+            <h1>Project</h1>
+            <Video />
+          </>
+        );
       case "readme":
         return (
           <>
@@ -293,7 +299,20 @@ const App = () => {
           </>
         );
       case "walkthrough":
-        return <h1>Walkthrough</h1>;
+        return (
+          <>
+            <h1>Walkthrough</h1>
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/aWuAgwsYNAA"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </>
+        );
         break;
       default:
     }
