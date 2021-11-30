@@ -13,7 +13,7 @@ Powerballer is a basic lottery contract that enables people to buy tickets in a 
 ## Screencast
 
 [walktrough](https://www.youtube.com/watch?v=Kh0kivKQX6c)
-  
+
 ## Frontend Code
 
 The project has a basic directory structure of the following:
@@ -43,6 +43,12 @@ The frontend code running at [website](https://github.com) or on [localhost](htt
 
 - Ethereum Address for NFT certification: **0xe24a951c2bd93197bcBe03b6Fa5507C61946F4b0**
 - [Etherscan link](https://etherscan.io/address/0xe24a951c2bd93197bcBe03b6Fa5507C61946F4b0)
+
+## Ropsten Deployed Contract
+
+- Deployed Contract Address: **0x00e856a1154F09A9f219aA75bBBcfF0b467BB747**
+- [Ropsten Explorer Contract Link](https://ropsten.etherscan.io/address/0x00e856a1154f09a9f219aa75bbbcff0b467bb747)
+
 
 ## Course Requirements
 
