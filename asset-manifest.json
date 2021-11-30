@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.js": "/%20blockchain-developer-bootcamp-project/static/js/main.928733b1.chunk.js",
+    "main.js.map": "/%20blockchain-developer-bootcamp-project/static/js/main.928733b1.chunk.js.map",
+    "runtime-main.js": "/%20blockchain-developer-bootcamp-project/static/js/runtime-main.224890d9.js",
+    "runtime-main.js.map": "/%20blockchain-developer-bootcamp-project/static/js/runtime-main.224890d9.js.map",
+    "static/js/2.e89a282f.chunk.js": "/%20blockchain-developer-bootcamp-project/static/js/2.e89a282f.chunk.js",
+    "static/js/2.e89a282f.chunk.js.map": "/%20blockchain-developer-bootcamp-project/static/js/2.e89a282f.chunk.js.map",
+    "index.html": "/%20blockchain-developer-bootcamp-project/index.html",
+    "precache-manifest.c267e2dba861086d2df49ddc15165c11.js": "/%20blockchain-developer-bootcamp-project/precache-manifest.c267e2dba861086d2df49ddc15165c11.js",
+    "service-worker.js": "/%20blockchain-developer-bootcamp-project/service-worker.js",
+    "static/media/admin.svg": "/%20blockchain-developer-bootcamp-project/static/media/admin.180cdf14.svg",
+    "static/media/empty.svg": "/%20blockchain-developer-bootcamp-project/static/media/empty.3563e553.svg",
+    "static/media/metamask.svg": "/%20blockchain-developer-bootcamp-project/static/media/metamask.36e25016.svg",
+    "static/media/player.svg": "/%20blockchain-developer-bootcamp-project/static/media/player.efd776ed.svg",
+    "static/media/powerballer.svg": "/%20blockchain-developer-bootcamp-project/static/media/powerballer.245f93c4.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.224890d9.js",
+    "static/js/2.e89a282f.chunk.js",
+    "static/js/main.928733b1.chunk.js"
+  ]
+}
