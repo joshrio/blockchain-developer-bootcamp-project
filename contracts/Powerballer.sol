@@ -1,6 +1,7 @@
 pragma solidity >=0.5.0;
 import  "./Ownable.sol";
 
+// Inherits from the Ownable contract for access control
 contract Powerballer is Ownable {
 
   // Set the variables for the two participants
