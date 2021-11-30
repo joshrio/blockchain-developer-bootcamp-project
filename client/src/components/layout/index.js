@@ -18,7 +18,9 @@ const Layout = ({
   signer,
   owner,
   players,
+  currentItem,
 }) => {
+  console.log(currentItem);
   return (
     <Container>
       <Menu>
@@ -31,18 +33,20 @@ const Layout = ({
         </List>
       </Menu>
       <Body>{children}</Body>
-      <Sidebar
-        connect={connect}
-        address={address}
-        balance={balance}
-        walletLabel={walletLabel}
-        pickWinner={pickWinner}
-        startLottery={startLottery}
-        enterLottery={enterLottery}
-        signer={signer}
-        owner={owner}
-        players={players}
-      />
+      {currentItem === "application" && (
+        <Sidebar
+          connect={connect}
+          address={address}
+          balance={balance}
+          walletLabel={walletLabel}
+          pickWinner={pickWinner}
+          startLottery={startLottery}
+          enterLottery={enterLottery}
+          signer={signer}
+          owner={owner}
+          players={players}
+        />
+      )}
     </Container>
   );
 };

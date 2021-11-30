@@ -228,7 +228,6 @@ const App = () => {
     contract
       .enterLottery(tx)
       .then((transaction) => {
-        // console.log(transaction);
         const { confirmations, transactionHash } = transaction;
         setTicketHash(transactionHash);
         setTicketConfirms(confirmations);
@@ -342,6 +341,7 @@ const App = () => {
         enterLottery={enterLottery}
         signer={signer}
         players={players}
+        currentItem={currentItem}
       >
         {renderItems()}
       </Layout>
