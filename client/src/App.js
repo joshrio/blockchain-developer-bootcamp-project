@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { ethers } from "ethers";
 
 import Navigation from "./components/nav/index.js";
-
 import getEthers from "./getEthers";
 import Connect from "./components/connect/index.js";
 
@@ -18,7 +17,6 @@ import Empty from "./components/empty";
 import Video from "./components/video";
 
 // Contracts
-import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import Powerballer from "./contracts/Powerballer.json";
 
 const App = () => {
@@ -43,7 +41,7 @@ const App = () => {
   // FOR LAYOUT
   const [currentItem, setCurrentItem] = useState("application");
 
-  // FOR POWERBALLERS
+  // FOR ROLES
   const [players, setPlayers] = useState([]);
   const [owner, setOwner] = useState(null);
 

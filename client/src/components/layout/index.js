@@ -20,7 +20,6 @@ const Layout = ({
   players,
   currentItem,
 }) => {
-  console.log(currentItem);
   return (
     <Container>
       <Menu>
