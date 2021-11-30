@@ -9,7 +9,7 @@ The project has a basic directory structure of the following:
 - [client](https://github.com/joshrio/blockchain-developer-bootcamp-project/tree/main/client)
 - [contracts](https://github.com/joshrio/blockchain-developer-bootcamp-project/tree/main/contracts)
 - [migrations](https://github.com/joshrio/blockchain-developer-bootcamp-project/tree/main/migrations)
-- [tests](https://github.com/joshrio/blockchain-developer-bootcamp-project/tree/main/test)
+- [tests](https://github.com/joshrio/blockchain-developer-bootcamp-project/blob/main/test/powerballer.js)
 
 The frontend project can be found in `/client` and requires the instructor to `npm install` and then `npm run start` to get the dApplication working.
 
